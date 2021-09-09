@@ -1,0 +1,20 @@
+USE INLOCK;
+GO
+
+SELECT * FROM STUDIO
+
+SELECT * FROM JOGOS
+
+SELECT * FROM USUARIO
+
+SELECT idJogos, nomeJogo, nomeStudio FROM JOGOS
+LEFT JOIN STUDIO
+ON JOGOS.idStudio = STUDIO.idStudio
+
+SELECT * FROM JOGOS WHERE idJogos = '3' 
+
+SELECT * FROM STUDIO WHERE idStudio = '2'
+
+SELECT * FROM USUARIO WHERE emailUsuario = 'admin@admin.com'
+
+SELECT * FROM USUARIO WHERE senhaUsuario = 'admin'
