@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\caio0\\OneDrive\\Área de Trabalho\\senai.inlock.webApi\\senai.inlock.webApi\\senai.inlock.webApi.csproj": {}
+    "C:\\Users\\caio0\\OneDrive\\Área de Trabalho\\InLock-M\\Api\\senai.inlock.webApi\\senai.inlock.webApi\\senai.inlock.webApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\caio0\\OneDrive\\Área de Trabalho\\senai.inlock.webApi\\senai.inlock.webApi\\senai.inlock.webApi.csproj": {
+    "C:\\Users\\caio0\\OneDrive\\Área de Trabalho\\InLock-M\\Api\\senai.inlock.webApi\\senai.inlock.webApi\\senai.inlock.webApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\caio0\\OneDrive\\Área de Trabalho\\senai.inlock.webApi\\senai.inlock.webApi\\senai.inlock.webApi.csproj",
+        "projectUniqueName": "C:\\Users\\caio0\\OneDrive\\Área de Trabalho\\InLock-M\\Api\\senai.inlock.webApi\\senai.inlock.webApi\\senai.inlock.webApi.csproj",
         "projectName": "senai.inlock.webApi",
-        "projectPath": "C:\\Users\\caio0\\OneDrive\\Área de Trabalho\\senai.inlock.webApi\\senai.inlock.webApi\\senai.inlock.webApi.csproj",
+        "projectPath": "C:\\Users\\caio0\\OneDrive\\Área de Trabalho\\InLock-M\\Api\\senai.inlock.webApi\\senai.inlock.webApi\\senai.inlock.webApi.csproj",
         "packagesPath": "C:\\Users\\caio0\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\caio0\\OneDrive\\Área de Trabalho\\senai.inlock.webApi\\senai.inlock.webApi\\obj\\",
+        "outputPath": "C:\\Users\\caio0\\OneDrive\\Área de Trabalho\\InLock-M\\Api\\senai.inlock.webApi\\senai.inlock.webApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\caio0\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,9 +40,17 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[5.0.9, )"
+            },
             "System.Data.SqlClient": {
               "target": "Package",
               "version": "[4.8.2, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[6.12.2, )"
             }
           },
           "imports": [

@@ -33,6 +33,45 @@ namespace senai.inlock.webApi.Repositories
             }
         }
 
+        public UsuarioDomain buscarPorEmailSenha(string email, string senha)
+        {
+            using (SqlConnection con = new SqlConnection(stringConexao))
+            {
+                string querySelect = @"SELECT * FROM USUARIO WHERE
+                                        email = @email
+                                            AND
+                                        senha = @senha;";
+
+                using (SqlCommand cmd = new SqlCommand(querySelect, con))
+                {
+                    cmd.Parameters.AddWithValue("@email", email);
+                    cmd.Parameters.AddWithValue("@senha", senha);
+
+                    con.Open();
+
+                    SqlDataReader leitor = cmd.ExecuteReader();
+
+                    if (leitor.Read())
+                    {
+                        UsuarioDomain usuarioBuscado = new UsuarioDomain()
+                        {
+                            idUsuario = Convert.ToInt32(leitor["idUsuario"]),
+                            emailUsuario = Convert.ToString(leitor["emailUsuario"]),
+                            senhaUsuario = Convert.ToString(leitor["senhaUsuario"]),
+                            idTipoUsuario = Convert.ToInt32(leitor["idTipoUsuario"]),
+                        };
+
+                        return usuarioBuscado;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
+        }
+
+
         public UsuarioDomain buscarPorId(int id)
         {
             UsuarioDomain Usuario = new UsuarioDomain();

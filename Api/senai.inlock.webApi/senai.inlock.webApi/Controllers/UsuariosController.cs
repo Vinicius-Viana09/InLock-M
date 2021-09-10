@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using senai.inlock.webApi.Domains;
 using senai.inlock.webApi.Interfaces;
 using senai.inlock.webApi.Repositories;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace senai.inlock.webApi.Controllers
@@ -22,6 +25,44 @@ namespace senai.inlock.webApi.Controllers
         {
 
             _UsuarioRepository = new UsuarioRepository();
+        }
+
+        [HttpPost("Login")]
+        public IActionResult Login(UsuarioDomain loginUser)
+        {
+           UsuarioDomain usuarioBuscado = _UsuarioRepository.buscarPorEmailSenha(loginUser.emailUsuario, loginUser.senhaUsuario);
+
+            if (usuarioBuscado != null)
+            {
+                // return Ok(usuarioBuscado);
+                var claimsInlock = new[]
+                {
+                    new Claim(JwtRegisteredClaimNames.Email, usuarioBuscado.emailUsuario),
+                    new Claim (JwtRegisteredClaimNames.Jti, usuarioBuscado.idUsuario.ToString()),
+                    new Claim (ClaimTypes.Role, usuarioBuscado.idTipoUsuario.ToString())
+
+                };
+
+                var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("Posso-pressentir-o-perigo-e-o-caos"));
+                var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+                var TokenLogin = new JwtSecurityToken(
+                    issuer: "inLock.WebAPI",
+                    audience: "inLock.WebAPI",
+                    claims: claimsInlock,
+                    expires: DateTime.Now.AddHours(5),
+                    signingCredentials: creds
+                    ) ;
+
+                return Ok(new
+                {
+                    token = new JwtSecurityTokenHandler().WriteToken(TokenLogin)
+                });
+            }
+            else
+            {
+                return NotFound("Email ou senha inválidos");
+            }
         }
 
         [HttpGet]
