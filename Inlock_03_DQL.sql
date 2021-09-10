@@ -11,6 +11,10 @@ SELECT idJogos, nomeJogo, nomeStudio FROM JOGOS
 LEFT JOIN STUDIO
 ON JOGOS.idStudio = STUDIO.idStudio
 
+SELECT * FROM STUDIO
+LEFT JOIN JOGOS
+ON JOGOS.idStudio = STUDIO.idStudio
+
 SELECT * FROM JOGOS WHERE idJogos = '3' 
 
 SELECT * FROM STUDIO WHERE idStudio = '2'
