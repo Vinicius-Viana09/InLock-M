@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using senai.inlock.webApi.Domains;
 using senai.inlock.webApi.Interfaces;
 using senai.inlock.webApi.Repositories;
@@ -23,6 +24,7 @@ namespace senai.inlock.webApi.Controllers
             _TipoUsuarioRepository = new TipoUsuarioRepository();
         }
 
+        [Authorize(Roles = "1")]
         [HttpGet]
         public IActionResult get()
         {
@@ -31,6 +33,7 @@ namespace senai.inlock.webApi.Controllers
             return Ok(ListaTipoUsuarios);
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
@@ -52,6 +55,7 @@ namespace senai.inlock.webApi.Controllers
             return StatusCode(201);
         }
 
+        [Authorize]
         [HttpPut("{id}")]
         public IActionResult PutUrl(int id, TipoUsuarioDomain TipoUsuarioAtualizado)
         {
@@ -79,6 +83,7 @@ namespace senai.inlock.webApi.Controllers
             }
         }
 
+        [Authorize]
         [HttpDelete("excluir/{id}")]
         public IActionResult Delete(int id)
         {

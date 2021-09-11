@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using senai.inlock.webApi.Domains;
 using senai.inlock.webApi.Interfaces;
 using senai.inlock.webApi.Repositories;
@@ -24,6 +25,7 @@ namespace senai.inlock.webApi.Controllers
             _StudioRepository = new StudioRepository();
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult get()
         {
@@ -32,6 +34,7 @@ namespace senai.inlock.webApi.Controllers
             return Ok(ListaStudios);
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
@@ -45,6 +48,7 @@ namespace senai.inlock.webApi.Controllers
             return Ok(StudioPesquisado);
         }
 
+        [Authorize(Roles = "1")]
         [HttpPost]
         public IActionResult Post(StudioDomain novoStudio)
         {
@@ -53,6 +57,7 @@ namespace senai.inlock.webApi.Controllers
             return StatusCode(201);
         }
 
+        [Authorize]
         [HttpPut("{id}")]
         public IActionResult PutUrl(int id, StudioDomain StudioAtualizado)
         {
@@ -80,6 +85,7 @@ namespace senai.inlock.webApi.Controllers
             }
         }
 
+        [Authorize(Roles = "1")]
         [HttpDelete("excluir/{id}")]
         public IActionResult Delete(int id)
         {
